@@ -23,7 +23,7 @@
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="{{route('store-user')}}" method="post">@csrf
+      <form action="{{route('store-user')}}" method="post" enctype="multipart/form-data">@csrf
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Full name" name="fullname">
 
@@ -86,6 +86,37 @@
           </div>
           <!-- /.col -->
         </div>
+
+             <div class="input-group">
+    <label>choose here</label>
+    <select name="role_id" id="role">
+        <option value="">-- Select Role --</option>
+        @foreach($roles as $role)
+        <option value="{{$role->id}}">{{$role->name}}</option>
+      @endforeach
+    </select>
+    @error('role')
+        <span>{{ $message }}</span>
+    @enderror
+</div>
+
+<div class="input-group mb-3">
+  <input type="file" class="form-control" name="image" accept="image/*">
+
+  <div class="input-group-append">
+    <div class="input-group-text">
+      <span class="fas fa-image"></span>
+    </div>
+  </div>
+</div>
+
+@error('image')
+  <span class="invalid-feedback d-block">{{ $message }}</span>
+@enderror
+
+
+
+        
       </form>
 
     

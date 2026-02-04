@@ -22,3 +22,7 @@ Route::post('/products-store',[ProductController::class,'storeProduct'])->name('
 // login page
 Route::get('/login-page',[SiteController::class,'loginPage'])->name('get.login');
 Route::post('/user-login',[AuthController::class,'login'])->name('post.login');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout.page');
+
+// for profile view
+Route::get('/profile',[SiteController::class,'profile'])->name('get.profile');

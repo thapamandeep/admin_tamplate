@@ -1,5 +1,11 @@
  @extends('layout.app')
  @section('content')
+ {{-- @php 
+  use Illuminate\Support\Facades\Auth;
+ dd(Auth::user());
+ @endphp --}}
+
+
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -18,6 +24,8 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+     {{Auth::user()->name}}
+     {{Auth::user()->email}}
 
     <!-- Main content -->
     <section class="content">
@@ -603,4 +611,5 @@
     </section>
     <!-- /.content -->
   </div>
+</div>
   @endsection

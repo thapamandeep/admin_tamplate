@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Role;
 
 class SiteController extends Controller
 {
     public function home(){
 
+    
     return view('pages.home');
     }
 
@@ -23,8 +26,8 @@ class SiteController extends Controller
     }
 
     public function userRegister(){
-   
-    return view('pages.register');
+   $roles = Role::all();
+    return view('pages.register', compact('roles'));
     }
 
     public function productsPage(){
@@ -36,5 +39,10 @@ class SiteController extends Controller
 
     return view('pages.login');
     }
+public function profile(){
+$user = Auth::user();
+return view('pages.profile', compact('user'));
+}
+   
 
 }

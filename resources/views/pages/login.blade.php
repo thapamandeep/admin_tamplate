@@ -112,6 +112,13 @@
             cursor: pointer;
             color: inherit;
         }
+        .input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
     </style>
 </head>
 
@@ -164,6 +171,11 @@
         <p class="register-link">
             Don't have an account? <a href="#">Register</a>
         </p>
+
+        <div class="input-group">
+    
+</div>
+
     </form>
 </div>
 
