@@ -118,6 +118,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+.error{
+    color:red;
+    font-size:12px;
+}
 
     </style>
 </head>
@@ -153,23 +157,28 @@
         <div class="input-group">
             <label>Email</label>
             <input type="email" name="email" placeholder="Enter your email">
+         <div class="error">  
             @error('email')
             <span>{{ $message }}</span>
             @enderror
+            </div> 
         </div>
 
         <div class="input-group">
             <label>Password</label>
             <input type="password" name="password" placeholder="Enter your password">
-            @error('password')
+       
+            <div class="error">  
+            @error('')
             <span>{{ $message }}</span>
             @enderror
+            </div> 
         </div>
 
         <button type="submit">Login</button>
 
         <p class="register-link">
-            Don't have an account? <a href="#">Register</a>
+            Don't have an account? <a href="{{route('get.register')}}">Register</a>
         </p>
 
         <div class="input-group">

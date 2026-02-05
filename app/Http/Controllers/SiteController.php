@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
 
+
 class SiteController extends Controller
 {
     public function home(){
@@ -36,13 +37,29 @@ class SiteController extends Controller
     }
 
     public function loginPage(){
-
+ 
+   
+    
     return view('pages.login');
     }
 public function profile(){
 $user = Auth::user();
 return view('pages.profile', compact('user'));
 }
+
+public function customerPage(){
+
+return view('pages.customer');
+}
+
+public function userPage(){
+
+return view('pages.user');
+}
    
+public function adminPage(){
+
+return view('pages.home');
+}
 
 }

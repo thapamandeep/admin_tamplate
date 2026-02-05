@@ -61,30 +61,47 @@ $data = $request->validate([
 $user = User::where('email',$data['email'])->first();
 
 if($user){
+  
+
 
 if(Hash::check($data['password'],$user->password)){
 
 Auth::login($user);
 
-return redirect()->route('homePage');
+if(Auth::user()->role_id == 1){
 
-}else{
+return redirect()->route('get.customer');
+}
 
-Session::flash('error_message','password incorrect');
-return redirect()->back();
+elseif(Auth::user()->role_id == 2){
+
+return redirect()->route('get.admin');
+
+
+}elseif(Auth::user()->role_id == 3){
+
+
+return redirect()->route('get.user');
 
 }
 
-}else{
   
-  Session::flash('error_message','user has not found');
+Session::flash('error_message','user has not found');
   return redirect()->back();
+ 
 }
 
- }
-  public function logout(){
+}
+
+}
+
+
+ public function logout(){
 
    Auth::logout();
    return redirect()->route('get.login');
     }
+
 }
+
+ 

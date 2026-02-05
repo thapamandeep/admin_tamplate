@@ -4,7 +4,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('/assets/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       
-      <span class="brand-text font-weight-light">{{Auth::user()->role->name}}</span>
+      <span class="brand-text font-weight-light">{{ Auth::check() ? Auth::user()->role->name : '-'}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -19,7 +19,7 @@
                  @endif
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="#" class="d-block">{{Auth::check() ? Auth::user()->name : '-'}}</a>
         </div>
       </div>
 

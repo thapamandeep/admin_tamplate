@@ -17,6 +17,19 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="card card-outline card-primary">
+
+  
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            <h4>Success!</h4>
+            <p>{{ Session::get('success') }}</p>
+            <button type="button" class="close" onclick="this.parentElement.style.display='none';">
+                &times;
+            </button>
+        </div>
+    @endif
+
+  
     <div class="card-header text-center">
       <b>User</b>Register
     </div>
