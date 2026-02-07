@@ -1,8 +1,8 @@
-@extends('layout.app')
+@extends('layout.userLayout')
 @section('content')
 <div class="content-wrapper">
 <div>
-<h1>user</h1>
+<h3>Welcome to page {{Auth::user()->name}}</h3>
 </div>
 </div>
 </div>

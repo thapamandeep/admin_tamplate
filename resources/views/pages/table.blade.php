@@ -5,7 +5,15 @@
 
     <section class="content-header">
         <div class="container-fluid">
-            <h1>Users</h1>
+         
+
+              <div class="card-header d-flex justify-content-between align-items-center">
+     
+        <a href="{{route('get.register')}}" class="btn btn-success btn-sm">
+            <i class="fas fa-plus"></i> Add User
+        </a>
+    </div>
+
         </div>
     </section>
 
@@ -37,8 +45,8 @@
                             <td>{{ $user->created_at }}</td>
                             <td>{{ $user->role_id }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="{{route('edit.user',$user->id)}}" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{route('delete.user',$user->id)}}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
                         </tr>
                         @empty

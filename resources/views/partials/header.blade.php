@@ -1,4 +1,31 @@
-  <!-- Navbar -->
+ <style>'
+  /* Navbar Logout Button */
+.navbar-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff; /* white text */
+    background-color: #e74c3c; /* red button */
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.navbar-logout-btn i {
+    font-size: 16px;
+}
+
+.navbar-logout-btn:hover {
+    background-color: #ff7675; /* lighter red on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+ </style>
+ <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -95,9 +122,7 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
         </div>
       </li>
-       <div>
-         <a href="{{route('logout.page')}}"> <button type="button">Log Out</button></a>
-         </div>
+   
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -113,17 +138,29 @@
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
-        
             <span class="float-right text-muted text-sm">12 hours</span>
           </a>
+
+  
+
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <i class="fas fa-file mr-2"></i> 3 new reports
             <span class="float-right text-muted text-sm">2 days</span>
           </a>
+
+    
+
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
+
+                          <div class="nav-item logout-wrapper">
+    <a href="{{ route('logout.page') }}" class="navbar-logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Log Out
+    </a>
+</div>
+
         
       </li>
       <li class="nav-item">

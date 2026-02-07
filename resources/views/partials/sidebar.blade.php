@@ -51,15 +51,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('form-show')}}" class="nav-link">
+                <a href="{{ route('create.product')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Vehicle Form</p>
+                  <p>Manage Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('form-show')}}" class="nav-link">
+                <a href="{{ route('create.category')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
+                  <p>Manage Category</p>
                 </a>
               </li>
               
@@ -76,15 +76,22 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="{{route('get.productTable')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Simple Tables</p>
+                  <p>Product Tables</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('table-show')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users Table</p>
+                </a>
+              </li>
+
+                <li class="nav-item">
+                <a href="{{ route('get.categoryTable')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Category Table</p>
                 </a>
               </li>
               

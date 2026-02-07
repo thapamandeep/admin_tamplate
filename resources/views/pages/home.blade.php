@@ -24,8 +24,7 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-     {{Auth::user()->name}}
-     {{Auth::user()->email}}
+   
 
     <!-- Main content -->
     <section class="content">
