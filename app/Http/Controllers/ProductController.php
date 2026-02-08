@@ -31,8 +31,12 @@ $products = new Product();
 $products->title = $data['title'];
 $products->description = $data['description'];
 $products->image = $newImage;
-$products->quantity = $data['quantity'];
-$products->cost = $data['cost'];
+
+$quantity = $data['quantity'];
+$cost_per_unit = $data['cost'];
+
+$products->quantity = $quantity;
+$products->cost = $quantity * $cost_per_unit;
 $products->category_id= $data['category_id'];
 
 $products->save();
@@ -47,7 +51,7 @@ return redirect()->back();
 
     $categories = Category::all();
 
-   return view('pages.editProduct',compact('product','categories'));
+   return view('pages.product.edit',compact('product','categories'));
     }
 
     public function updateProduct(Request $request, Product $product){
@@ -59,18 +63,20 @@ return redirect()->back();
     'description' => 'required|string',
     'quantity' => 'required|integer|min:1',
     'cost' => 'required|numeric|min:0',
-    'category_id' => 'required|exists:categories,id'
+    'category_id' => 'required|exists:categories,id',
+    'old_image' => 'required'
     ]);
 
-       
-
-
-       
+    
 
 $product->title = $data['title'];
 $product->description = $data['description'];
-$product->quantity = $data['quantity'];
-$product->cost = $data['cost'];
+
+$quantity = $data['quantity'];
+$cost_per_unit = $data['cost'];
+
+$product->quantity = $quantity;
+$product->cost = $quantity * $cost_per_unit;
 $product->category_id= $data['category_id'];
 
  if ($request->hasFile('image')) {
@@ -85,6 +91,8 @@ $product->category_id= $data['category_id'];
           if ($oldImage && file_exists(storage_path('app/public/gallery/'.$product->image))) {
             unlink(storage_path('app/public/gallery/'.$product->image));
         }
+    }else{
+        $product->image = $data['old_image'];
     }
 
 $product->save();
@@ -100,4 +108,11 @@ return redirect()->back();
 
       return redirect()->route('get.productTable')->with('success', 'Data has been deleted');
     }
+
+    public function show(Product $product){
+
+
+    return view('pages.product.detail', compact('product'));
+}
+
 }

@@ -190,7 +190,7 @@ img.current-image{
                     @else
                    <p>No image uploaded yet.</p>
                 @endif
-
+                <input type="hidden" name="old_image" value="{{$product->image }}">
                 <input type="file" name="image" accept="image/*">
                 @error('image')
                 <span class="invalid-feedback" role="alert">

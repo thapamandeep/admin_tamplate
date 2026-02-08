@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
 
 
-    return view('pages.editCategory',compact('category'));
+    return view('pages.category.editCategory',compact('category'));
 
     }
 

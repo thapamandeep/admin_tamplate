@@ -19,7 +19,7 @@
                  @endif
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::check() ? Auth::user()->name : '-'}}</a>
+          <a href="{{route('get.profile')}}" class="d-block">{{Auth::check() ? Auth::user()->name : '-'}}</a>
         </div>
       </div>
 
@@ -70,7 +70,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Products
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -81,12 +81,12 @@
                   <p>Product Tables</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="{{ route('table-show')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users Table</p>
                 </a>
-              </li>
+              </li> -->
 
                 <li class="nav-item">
                 <a href="{{ route('get.categoryTable')}}" class="nav-link">

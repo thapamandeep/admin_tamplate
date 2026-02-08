@@ -31,7 +31,7 @@ class SiteController extends Controller
 
     public function userRegister(){
    $roles = Role::all();
-    return view('pages.register', compact('roles'));
+    return view('pages.user.register', compact('roles'));
     }
 
     public function productsPage(){
@@ -72,22 +72,22 @@ $categories = Category::all();
 
 // dd($categories);
 
-return view('pages.form', compact('categories') );
+return view('pages.product.create', compact('categories') );
 }
 
 public function category(){
 
-return view('pages.category');
+return view('pages.category.create');
 }
 
 public function productTable(){
 $products = Product::all();
-return view('pages.productTable', compact('products'));
+return view('pages.product.index', compact('products'));
 }
 
 public function categoryTable(){
 $categories = Category::all();
-return view('pages.categoryTable', compact('categories'));
+return view('pages.category.index', compact('categories'));
 }
 
 }

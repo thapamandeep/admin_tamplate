@@ -47,27 +47,28 @@ Route::get('/admin',[SiteController::class,'adminPage'])->name('get.admin')->mid
   
 Route::middleware('admin')->group(function(){
 // this is for form of category and product
-Route::get('/productForm',[SiteController::class,'productForm'])->name('create.product');
-Route::get('/categoryForm',[SiteController::class,'category'])->name('create.category');
-Route::post('/storeProduct',[ProductController::class,'storeProduct'])->name('store.product');
-Route::post('/storeCategory',[CategoryController::class,'storeCategory'])->name('store.category');
+Route::get('/product-form',[SiteController::class,'productForm'])->name('create.product');
+Route::get('/category-form',[SiteController::class,'category'])->name('create.category');
+Route::post('/store-product',[ProductController::class,'storeProduct'])->name('store.product');
+Route::post('/store-category',[CategoryController::class,'storeCategory'])->name('store.category');
 
 // this for table show
-Route::get('/productTable',[SiteController::class,'productTable'])->name('get.productTable');
-Route::get('/categoryTable',[SiteController::class,'categoryTable'])->name('get.categoryTable');
+Route::get('/product-table',[SiteController::class,'productTable'])->name('get.productTable');
+Route::get('/category-table',[SiteController::class,'categoryTable'])->name('get.categoryTable');
 
 // this for edit
-Route::get('/editCategory/{id}',[CategoryController::class,'editCategory'])->name('edit.category');
-Route::get('/editProduct/{product}',[ProductController::class,'editProduct'])->name('edit.product');
-Route::post('/updateCategory/{id}',[CategoryController::class,'updateCategory'])->name('update.category');
-Route::post('/updateProduct/{product}',[ProductController::class,'updateProduct'])->name('update.product');
-Route::get('/editUser/{user}',[AuthController::class,'editUser'])->name('edit.user');
-Route::post('/editUser/{user}',[AuthController::class,'updateUser'])->name('update.user');
+Route::get('/edit-category/{id}',[CategoryController::class,'editCategory'])->name('edit.category');
+Route::get('/edit-product/{product}',[ProductController::class,'editProduct'])->name('edit.product');
+Route::post('/update-category/{id}',[CategoryController::class,'updateCategory'])->name('update.category');
+Route::post('/update-product/{product}',[ProductController::class,'updateProduct'])->name('update.product');
+Route::get('/edit-user/{user}',[AuthController::class,'editUser'])->name('edit.user');
+Route::post('/edit-user/{user}',[AuthController::class,'updateUser'])->name('update.user');
 
 // this for delete
-Route::get('/deleteProduct/{product}',[ProductController::class,'deleteProduct'])->name('delete.product');
-Route::get('/deletecategory/{category}',[CategoryController::class,'deleteCategory'])->name('delete.category');
-Route::get('/deleteUser/{user}',[AuthController::class,'deleteUser'])->name('delete.user');
+Route::get('/delete-product/{product}',[ProductController::class,'deleteProduct'])->name('delete.product');
+Route::get('/delete-category/{category}',[CategoryController::class,'deleteCategory'])->name('delete.category');
+Route::get('/delete-user/{user}',[AuthController::class,'deleteUser'])->name('delete.user');
+Route::get('/product-show/{product}', [ProductController::class,'show'])->name('detail.product');
 
 
 });

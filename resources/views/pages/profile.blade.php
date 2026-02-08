@@ -1,146 +1,173 @@
 @extends('layout.app')
 
 @section('content')
-<div class="content-wrapper">
 
-    <!-- Page Header (optional) -->
+
+  
+<div class="wrapper">
+  <!-- Navbar -->
+
+
+ 
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-        <div class="container-fluid">
-            <h1>My Profile</h1>
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Profile</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">User Profile</li>
+            </ol>
+          </div>
         </div>
+      </div><!-- /.container-fluid -->
     </section>
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-
-                <!-- LEFT: PROFILE CARD -->
-                <div class="col-md-4">
-    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
-
-        <!-- Top Cover -->
-        <div style="height:120px; background:linear-gradient(135deg,#4e73df,#1cc88a);">
-        </div>
-
-        <div class="card-body text-center" style="margin-top:-70px;">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
 
             <!-- Profile Image -->
-            @if(Auth::user()->image)
-                <img class="img-fluid img-circle shadow"
-                     style="width:130px; height:130px; object-fit:cover; border:5px solid white;"
-                     src="{{ asset('storage/photos/' . Auth::user()->image) }}">
-            @else
-                <img class="img-fluid img-circle shadow"
-                     style="width:130px; height:130px; object-fit:cover; border:5px solid white;"
-                     src="{{ asset('assets/img/user2-160x160.jpg') }}">
-            @endif
-
-            <!-- User Name -->
-            <h4 class="mt-3 font-weight-bold">
-                {{ Auth::user()->name }}
-            </h4>
-
-            <!-- Role Badge -->
-            <span class="badge badge-pill badge-primary px-3 py-2">
-                {{ Auth::user()->role?->name ?? 'User' }}
-            </span>
-
-            <!-- Extra Info -->
-            <div class="mt-4 text-left">
-
-                <p class="mb-2">
-                    <i class="fas fa-envelope text-primary mr-2"></i>
-                    {{ Auth::user()->email }}
-                </p>
-
-                <p class="mb-2">
-                    <i class="fas fa-id-badge text-success mr-2"></i>
-                    Role ID: {{ Auth::user()->role?->id }}
-                </p>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-                <!-- RIGHT: EDIT PROFILE -->
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Edit Profile</h3>
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="{{asset('storage/photos/'.$user->image)}}"
+                       alt="User profile picture">
                 </div>
 
-                <div class="card-body">
+                <h3 class="profile-username text-center">{{Auth::user()->name}}</h3>
 
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
+                <p class="text-muted text-center">{{Auth::user()->email}}</p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Role Id</b> <a class="float-right">{{Auth::user()->role_id}}</a>
+                  </li>
+                
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- About Me Box -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">About Me</h3>
+              </div>
+              
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+          
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="activity">
+                    <!-- Post -->
+                 
+                
+
+                   
+                  </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="timeline">
+                    <!-- The timeline -->
+              
+                  </div>
+                  <!-- /.tab-pane -->
+
+                  <div class="tab-pane" id="settings">
+                    <form class="form-horizontal">
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" id="inputName" placeholder="{{Auth::user()->name}}">
                         </div>
-                    @endif
-
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        {{-- Full Name --}}
-                        <div class="form-group">
-                            <!-- <label>Full Name</label>
-                            <input type="text"
-                                   name="name"
-                                   class="form-control"
-                                   value="{{ old('name', Auth::user()->name) }}">
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" id="inputEmail" placeholder=" {{Auth::user()->email}}">
                         </div>
+                      </div>
 
-                        {{-- Email (readonly) --}}
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email"
-                                   class="form-control"
-                                   value="{{ Auth::user()->email }}"
-                                   readonly>
+                       <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Role Name</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputEmail" placeholder=" {{Auth::user()->role->name}}" >
                         </div>
-
-                        {{-- Phone --}}
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <input type="text"
-                                   name="phone"
-                                   class="form-control"
-                                   value="{{ old('phone', Auth::user()->phone) }}">
+                      </div>
+                     
+                      <div class="form-group row">
+                        <label for="inputSkills" class="col-sm-2 col-form-label">Created At</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="inputSkills" placeholder=" {{Auth::user()->created_at}}">
                         </div>
-
-                        {{-- Address --}}
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input type="text"
-                                   name="address"
-                                   class="form-control"
-                                   value="{{ old('address', Auth::user()->address) }}">
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                            </label>
+                          </div>
                         </div>
-
-                        {{-- Bio --}}
-                        <div class="form-group">
-                            <label>Bio</label>
-                            <textarea name="bio"
-                                      class="form-control"
-                                      rows="4">{{ old('bio', Auth::user()->bio) }}</textarea>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="submit" class="btn btn-danger">Submit</button>
                         </div>
-
-                        {{-- Profile Image --}}
-                        <div class="form-group">
-                            <label>Profile Image</label>
-                            <input type="file"
-                                   name="image"
-                                   class="form-control-file">
-                        </div>
-
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary">
-                                Update Profile
-                            </button>
-                        </div> -->
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
     </section>
+    <!-- /.content -->
+  </div>
 
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../dist/js/demo.js"></script>
+</body>
 </div>
 @endsection
