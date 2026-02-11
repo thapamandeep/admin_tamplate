@@ -88,9 +88,9 @@ $product->category_id= $data['category_id'];
         $file->storeAs('gallery', $newImage, 'public');
         $product->image = $newImage;
 
-          if ($oldImage && file_exists(storage_path('app/public/gallery/'.$product->image))) {
-            unlink(storage_path('app/public/gallery/'.$product->image));
-        }
+        //   if ($oldImage && file_exists(storage_path('app/public/gallery/'.$product->image))) {
+        //     unlink(storage_path('app/public/gallery/'.$product->image));
+        // }
     }else{
         $product->image = $data['old_image'];
     }

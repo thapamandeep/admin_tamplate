@@ -100,44 +100,68 @@
 }
 
 /* View Button */
-.view-btn button{
-    background: #00b894;
-    box-shadow: 0 4px 10px rgba(0,184,148,0.3);
+/* Button container spacing */
+.action-buttons .btn{
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    color: #fff;
+    transition: 0.3s ease;
 }
 
-.view-btn button:hover{
-    background: #019875;
-    box-shadow: 0 6px 14px rgba(0,184,148,0.45);
-    transform: translateY(-2px);
+/* View Button */
+.btn {
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
 }
 
-/* Edit Button */
-.edit-btn button{
-    background: #0984e3;
-    box-shadow: 0 4px 10px rgba(9,132,227,0.3);
+.edit {
+    background: green;
 }
 
-.edit-btn button:hover{
-    background: #0767b1;
-    box-shadow: 0 6px 14px rgba(9,132,227,0.45);
-    transform: translateY(-2px);
+.delete {
+    background: red;
+    border: none;
 }
 
-/* Delete Button */
-.delete-btn button{
-    background: #d63031;
-    box-shadow: 0 4px 10px rgba(214,48,49,0.3);
+.text-danger {
+            color: red;
+            font-size: 13px;
+
+            
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+
+ /* VIEW BUTTON STYLE */
+.btn-view {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+    color: #fff !important;
+    border: none;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.delete-btn button:hover{
-    background: #b71c1c;
-    box-shadow: 0 6px 14px rgba(214,48,49,0.45);
-    transform: translateY(-2px);
+/* Hover effect */
+.btn-view:hover {
+    background: linear-gradient(135deg, #138496, #117a8b);
+    color: #fff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(23,162,184,0.4);
 }
 
-/* Click Effect */
-.view-btn button:active,
-.edit-btn button:active,
-.delete-btn button:active{
-    transform: scale(0.95);
+/* Icon spacing */
+.btn-view i {
+    margin-right: 4px;
 }

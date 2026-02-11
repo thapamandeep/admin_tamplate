@@ -38,7 +38,8 @@ Route::middleware('home')->group(function(){
 });
 
 Route::middleware('role')->group(function(){
-Route::get('/',[SiteController::class,'home'])->name('homePage'); 
+  Route::get('/admin',[SiteController::class,'home'])->name('homePage'); 
+
 });
 
 Route::get('/customer',[SiteController::class,'customerPage'])->name('get.customer')->middleware('customer');
@@ -73,3 +74,7 @@ Route::get('/product-show/{product}', [ProductController::class,'show'])->name('
 
 });
 
+
+
+Route::get('/',[SiteController::class,'frontTamplate']);
+Route::get('/',[SiteController::class,'bestSelling'])->name('best.selling');

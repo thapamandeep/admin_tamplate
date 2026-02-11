@@ -74,15 +74,24 @@
                         {{ $product->created_at->format('d M Y') }}
                     </td>
 
-                    <td>
-                     <a href="{{route('detail.product',$product->id)}}" class="view-btn"><button>View</button></a>
 
-                    <a href="{{route('edit.product',$product->id)}}" class="edit-btn"><button>Edit</button></a>
+                 <td>
+                                    <a href="{{route('detail.product',$product->id)}}"
+                                       class="btn btn-sm btn-view">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
 
-                    <a href="{{route('delete.product',$product->id)}}" class="delete-btn" onclick="return confirm('Are you sure?')"><button>Delete</button></a>
+                                    <a href="{{ route('edit.product', $product->id) }}"
+                                       class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
 
-                        </a>
-                    </td>
+                                    <a href="{{ route('delete.product',$product->id) }}"
+                                       class="btn btn-sm btn-danger"
+                                       onclick="return confirm('Are you sure?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>
                 </tr>
                 @endforeach
             </tbody>

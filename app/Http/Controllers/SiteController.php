@@ -90,4 +90,22 @@ $categories = Category::all();
 return view('pages.category.index', compact('categories'));
 }
 
+ public function frontTamplate(){
+    $categories = Category::all();
+    $products = Product::where('created_at', '>=', Carbon::now()->subDays(4))
+                        ->latest()
+                        ->get();
+ return view('Site.Home.index',compact('products', 'categories'));
+}
+
+public function bestSelling(){
+    $categories = Category::all(); // optional if you use categories in Blade
+    $products = Product::all();    // if your Blade uses $products
+    $bestSellingproducts = Product::orderBy('cost','desc')->take(10)->get();
+
+    return view('Site.Home.index', compact('products', 'categories', 'bestSellingproducts'));
+}
+
+  
+
 }
