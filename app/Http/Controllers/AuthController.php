@@ -8,6 +8,12 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Mail\SendOtpMail;
+use App\Mail\ContactUsMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Category;
+
 
 
 class AuthController extends Controller
@@ -20,6 +26,7 @@ class AuthController extends Controller
     'email' => 'required|email|string',
     'password' => 'required|string|confirmed|min:6',
     'role_id' => 'required|exists:roles,id',
+    'otp'=>'nullable|string',
   
 
   ]);
@@ -40,6 +47,7 @@ class AuthController extends Controller
   $user->email = $data['email'];
   $user->password = Hash::make($data['password']);
   $user->role_id = $data['role_id'];
+  
 
 
 
@@ -68,17 +76,17 @@ if($user){  // Check if user exists
         // Redirect based on role
         if(Auth::user()->role_id == 3){
 
-            return redirect()->route('get.customer');
+            return redirect()->route('get.admin');
 
         } 
         elseif(Auth::user()->role_id == 1){
 
-            return redirect()->route('get.admin');
+            return redirect()->route('get.customer');
 
         } 
         elseif(Auth::user()->role_id == 2){
 
-            return redirect()->route('get.user');
+            return redirect()->route('get.front');
         }
          else {
             // Unknown role
@@ -160,9 +168,119 @@ if($user){  // Check if user exists
     return redirect()->back()->with('success','user data has been delete');
     }
 
+
+    public function forgot_Password(){
+
+return view('Site.pages.forgot_password');
+}
+
+public function resetPassword(){
+
+return view('Site.pages.new_password');
+}
+
+// -------------------------//----------------------
+
+public function forgotPassword(Request $request)
+{
+    // Validate email
+    $request->validate([
+        'email' => 'required|email|exists:users,email'
+    ]);
+
+    // Generate 6 digit random code
+    $otp = rand(100000, 999999);
+
+    $user = User::where('email',$request->email)->first();
+
+    $user->otp = $otp;
+    $user->save();
+
+    // Store in password_resets table
+ Mail::to($request->email)->send(new SendOtpMail($otp));
+
     
 
+    return redirect()->route('reset.password')->with('status', '6 digit code sent to your email');
+}
+
+// -------------------//------------------------//
+
+public function contactUs(){
+
+$categories = Category::all();
+return view('Site.pages.contactUs', compact('categories'));
 }
 
 
+public function contact_store(Request $request)
+{
  
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required',
+    ]);
+
+  
+    $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'message' => $request->message,
+    ];
+
+    // Send mail to ADMIN Gmail
+    Mail::to('mgrmandeep07@gmail.com')
+        ->send(new ContactUsMail($data));
+  
+return back()
+    ->with('success','Message sent successfully!');
+ 
+
+}
+public function updatePassword(Request $request){
+
+$data = $request->validate([
+'email'=>'required|email',
+'otp'=>'required',
+'new_password'=>'required',
+'confirm_password'=>'required|same:new_password',
+
+]);
+
+
+$user = User::where('email',$data['email'])->first();
+
+
+if(!$user){
+
+return back()->with('error','user not found');
+}elseif($user->otp != $data['otp']){
+
+return back()->with('error','invalid otp');
+}
+
+$user->password = Hash::make($data['new_password']);
+$user->otp = null;
+$user->save();
+
+Session::flash('success','your password has been updated');
+return redirect()->route('get.login');
+
+}
+
+public function category($slug)
+{
+    $products = Product::whereHas('category', function($query) use ($slug) {
+        $query->where('slug', $slug);
+    })->get();
+
+    $categories = Category::all();
+    return view('Site.Home.index', compact('products', 'categories'));
+}
+
+
+
+
+}
+

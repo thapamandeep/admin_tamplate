@@ -136,33 +136,36 @@
 
             <div class="category-carousel swiper">
               <div class="swiper-wrapper">
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('storage/gallery/icon-vegetables-broccoli.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
-                </a>
+             
+<a href="#" 
+   class="nav-link category-item swiper-slide">
+    <img src="{{ asset('img/noodles.png')}}" alt="noodles">
+    <h3 class="category-title">Noodles</h3>
+</a>
+
                 <a href="index.html" class="nav-link category-item swiper-slide">
                   <img src="{{asset('storage/gallery/icon-bread-baguette.png')}}" alt="Category Thumbnail">
                   <h3 class="category-title">Breads & Sweets</h3>
                 </a>
                 <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('storage/gallery/icon-soft-drinks-bottle.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
+                  <img src="{{asset('img/juice.png')}}" alt="Category Thumbnail">
+                  <h3 class="category-title">Juices</h3>
                 </a>
                 <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('storage/gallery/icon-wine-glass-bottle.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
+                  <img src="{{asset('img/cream.png')}}" alt="Category Thumbnail">
+                  <h3 class="category-title">Personal Care</h3>
                 </a>
                 <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('storage/gallery/icon-animal-products-drumsticks.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
+                  <img src="{{asset('img/wine.png')}}" alt="Category Thumbnail">
+                  <h3 class="category-title">Liquor</h3>
                 </a>
                 <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('storage/gallery/icon-bread-herb-flour.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
+                  <img src="{{asset('img/cola.png')}}" alt="Category Thumbnail">
+                  <h3 class="category-title">Cold Drinks</h3>
                 </a>
                 <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
+                  <img src="{{asset('img/toys.png')}}" alt="Category Thumbnail">
+                  <h3 class="category-title">Toys & Kids</h3>
                 </a>
                 <a href="index.html" class="nav-link category-item swiper-slide">
                   <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
@@ -346,12 +349,12 @@
                   
                 @foreach($products as $product)
 
-                    <div class="col-mb4">
+                <div class="col-mb4">
                       <div class="product-item">
                         <span class="badge bg-success position-absolute m-3">-25%</span>
                         <a href="#" class="btn-wishlist"><svg width="24" height="24"><use xlink:href="#heart"></use></svg></a>
                         <figure>
-                          <a href="index.html" title="Product Title">
+                           <a href="{{route('get.detail',$product->id)}}">
                             <img src="{{asset('storage/gallery/'.$product->image)}}"  class="tab-image">
                           </a>
                         </figure>

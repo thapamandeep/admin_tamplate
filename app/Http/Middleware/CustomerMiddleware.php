@@ -18,7 +18,7 @@ class CustomerMiddleware
     public function handle(Request $request, Closure $next): Response
     {
 
-    if(Auth::check() && Auth::user()->role_id == 3){
+    if(Auth::check() && Auth::user()->role_id == 1){
 
     
         return $next($request);

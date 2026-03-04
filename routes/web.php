@@ -22,7 +22,7 @@ Route::get('/products-page',[SiteController::class,'productsPage'])->name('produ
 Route::post('/products-store',[ProductController::class,'storeProduct'])->name('products-store');
 
 // login page
-Route::get('/login-page',[SiteController::class,'loginPage'])->name('get.login');
+Route::get('/login',[SiteController::class,'loginPage'])->name('get.login');
 Route::post('/user-login',[AuthController::class,'login'])->name('post.login');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout.page');
 
@@ -44,7 +44,7 @@ Route::middleware('role')->group(function(){
 
 Route::get('/customer',[SiteController::class,'customerPage'])->name('get.customer')->middleware('customer');
 Route::get('/user',[SiteController::class,'userPage'])->name('get.user')->middleware('user');
-Route::get('/admin',[SiteController::class,'adminPage'])->name('get.admin')->middleware('admin');
+Route::get('/admin',[SiteController::class,'adminPage'])->name('get.admin');
   
 Route::middleware('admin')->group(function(){
 // this is for form of category and product
@@ -74,7 +74,28 @@ Route::get('/product-show/{product}', [ProductController::class,'show'])->name('
 
 });
 
+// ---------------------------------------------//---------------------------------------------//
+
+Route::get('/front',[SiteController::class,'bestSelling'])->name('best.selling');
+Route::get('/product-detail/{product}',[SiteController::class,'detail'])->name('get.detail');
+
+Route::get('/forgot-password',[AuthController::claSS,'forgot_password'])->name('password.request');
+
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot.password');
 
 
-Route::get('/',[SiteController::class,'frontTamplate']);
-Route::get('/',[SiteController::class,'bestSelling'])->name('best.selling');
+route::get('/reset-password',[AuthController::class,'resetPassword'])->name('reset.password');
+
+Route::post('/reset-password', [AuthController::class, 'updatePassword'])
+      ->name('post.reset.password');
+
+  Route::get('/',[SiteController::class,'frontTamplate'])
+        ->name('get.front')->middleware('user');
+
+  Route::get('/view-profile',[SiteController::class,'viewProfile'])->name('get.viewProfile')->middleware('user');   
+  
+  Route::get('/contact-us',[AuthController::class,'contactUs'])->name('get.contact');
+
+  Route::post('/contact-store',[AuthController::class,'contact_store'])->name('post.contactus');
+
+  Route::get('/products/{slug}', [AuthController::class, 'category'])->name('get.category.products');

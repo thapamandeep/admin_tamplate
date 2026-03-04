@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('quantity');
             $table->decimal('cost',10,2);
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->timestamp();
+            $table->timestamps();
      });
     }
 

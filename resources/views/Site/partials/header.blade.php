@@ -34,13 +34,13 @@
           
           <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
             <div class="support-box text-end d-none d-xl-block">
-              <span class="fs-6 text-muted">For Support?</span>
-              <h5 class="mb-0">+980-34984089</h5>
+              <span class="fs-6 text-muted">{{Auth::user()->name}}</span>
+              <h5 class="mb-0">{{Auth::user()->role->name}}</h5>
             </div>
 
             <ul class="d-flex justify-content-end list-unstyled m-0">
               <li>
-                <a href="#" class="rounded-circle bg-light p-2 mx-1">
+                <a href="{{route('get.viewProfile')}}" class="rounded-circle bg-light p-2 mx-1">
                   <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#user"></use></svg>
                 </a>
               </li>
@@ -134,6 +134,11 @@
                     </li>
                     <li class="nav-item">
                       <a href="#blog" class="nav-link">Blog</a>
+                      
+                    </li>
+                     <li class="nav-item">
+                      <a href="{{route('get.contact')}}" class="nav-link">Contact us</a>
+                      
                     </li>
                   </ul>
                 

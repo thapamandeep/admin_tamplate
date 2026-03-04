@@ -9,15 +9,17 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Category;
 use App\Models\Product;
+use Carbon\Carbon;
 
 
 class SiteController extends Controller
 {
-    public function home(){
+ public function home(){
 
-    
-    return view('pages.home');
-    }
+    $categories = Category::all();
+
+    return view('pages.home', compact('categories'));
+}
 
     public function table(){
      $allusers = User::all();
@@ -92,10 +94,9 @@ return view('pages.category.index', compact('categories'));
 
  public function frontTamplate(){
     $categories = Category::all();
-    $products = Product::where('created_at', '>=', Carbon::now()->subDays(4))
-                        ->latest()
-                        ->get();
- return view('Site.Home.index',compact('products', 'categories'));
+    $products = Product::all();
+       $bestSellingproducts = Product::orderBy('cost','desc')->take(10)->get();                  
+ return view('Site.Home.index',compact('products', 'categories','bestSellingproducts'));
 }
 
 public function bestSelling(){
@@ -106,6 +107,17 @@ public function bestSelling(){
     return view('Site.Home.index', compact('products', 'categories', 'bestSellingproducts'));
 }
 
-  
+public function detail(Product $product){
+
+$categories = Category::all();
+
+return view('site.pages.product-detail', compact('product', 'categories'));
+}
+
+public function viewProfile(){
+$categories = Category::all();
+return view('Site.pages.profile',compact('categories'));
+}
+ 
 
 }
