@@ -1,4 +1,30 @@
+<style>
+  /* Login Button */
+.btn-login {
+    display: inline-block;
+    padding: 6px 18px;
+    background: #28a745; /* Food Mart green */
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+}
 
+.btn-login:hover {
+    background: #218838;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Optional: small user-name styling */
+.user-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+</style>
     <header>
       <div class="container-fluid">
         <div class="row py-3 border-bottom">
@@ -22,9 +48,11 @@
                 </select>
               </div>
               <div class="col-11 col-md-7">
-                <form id="search-form" class="text-center" action="index.html" method="post">
+               
+                <form id="search-form" class="text-center" action="" method="get">
                   <input type="text" class="form-control border-0 bg-transparent" placeholder="Search for more than 20,000 products" />
                 </form>
+              
               </div>
               <div class="col-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"/></svg>
@@ -34,8 +62,14 @@
           
           <div class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
             <div class="support-box text-end d-none d-xl-block">
-              <span class="fs-6 text-muted">{{Auth::user()->name}}</span>
-              <h5 class="mb-0">{{Auth::user()->role->name}}</h5>
+              <span class="fs-6 text-muted">
+              @if(Auth::check())
+              <p class="user-name">{{Auth::user()->name}}</p>
+              @else
+              <a href="{{ route('get.login') }}" class="btn-login">Login</a>
+              @endif
+             </span>
+           
             </div>
 
             <ul class="d-flex justify-content-end list-unstyled m-0">
@@ -63,8 +97,10 @@
 
             <div class="cart text-end d-none d-lg-block dropdown">
               <button class="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                <span class="fs-6 text-muted dropdown-toggle">Your Cart</span>
-                <span class="cart-total fs-5 fw-bold">$1290.00</span>
+               <a href="{{route('get.cart.show')}}"><span class="fs-6 text-muted dropdown-toggle">Your Cart</span></a> 
+                <span class="cart-total fs-5 fw-bold">
+              
+                </span>
               </button>
             </div>
           </div>

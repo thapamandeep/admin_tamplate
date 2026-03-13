@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Cart;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,10 @@ class User extends Authenticatable
     return $this->belongsTo(Role::class,'role_id');
     }
 
+        public function carts()
+    {
+        return $this->hasMany(Cart::class,'user_id');
+    }
     /**
      * Get the attributes that should be cast.
      *

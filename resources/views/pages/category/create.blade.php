@@ -116,22 +116,26 @@ input:focus{
 
     <h2>📂 Add Category</h2>
 
-    
-        {{-- Success Message --}}
+    {{-- Success Message --}}
     @if(session('success'))
         <div class="success-msg">
             {{ session('success') }}
         </div>
     @endif
 
-    <form action="{{ route('store.category') }}" method="POST">
+    {{-- Add enctype for file upload --}}
+    <form action="{{ route('store.category') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
             <label>Category Name</label>
-            <input type="text" name="name"
-                   placeholder="Enter category name"
-                   required>
+            <input type="text" name="name" placeholder="Enter category name">
+        </div>
+
+        {{-- New File Input for Image --}}
+        <div class="form-group">
+            <label>Category Image</label>
+            <input type="file" name="image" accept="image/*">
         </div>
 
         <button type="submit" class="submit-btn">

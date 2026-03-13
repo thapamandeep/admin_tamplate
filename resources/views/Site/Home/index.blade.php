@@ -62,12 +62,12 @@
                       <div class="row banner-content p-5">
                         <div class="content-wrapper col-md-7">
                           <div class="categories mb-3 pb-3">100% natural</div>
-                          <h3 class="banner-title">Heinz Tomato Ketchup</h3>
+                          <h3 class="banner-title">Joiner Juice</h3>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim massa diam elementum.</p>
                           <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">Shop Collection</a>
                         </div>
                         <div class="img-wrapper col-md-5">
-                          <img src="{{asset('storage/gallery/1770392614.jpg')}}" class="img-fluid">
+                          <img src="{{asset('img/joiner3.png')}}" class="img-fluid">
                         </div>
                       </div>
                     </div>
@@ -136,57 +136,14 @@
 
             <div class="category-carousel swiper">
               <div class="swiper-wrapper">
-             
-<a href="#" 
+    
+              @foreach($categories as $category)
+<a href="{{route('get.products',$category->id)}}" 
    class="nav-link category-item swiper-slide">
-    <img src="{{ asset('img/noodles.png')}}" alt="noodles">
-    <h3 class="category-title">Noodles</h3>
+    <img src="{{ asset('storage/gallery/'.$category->image)}}" alt="category_image">
+    <h3 class="category-title">{{$category->name}}</h3>
 </a>
-
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('storage/gallery/icon-bread-baguette.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Breads & Sweets</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('img/juice.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Juices</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('img/cream.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Personal Care</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('img/wine.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Liquor</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('img/cola.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Cold Drinks</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="{{asset('img/toys.png')}}" alt="Category Thumbnail">
-                  <h3 class="category-title">Toys & Kids</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
-                </a>
-                <a href="index.html" class="nav-link category-item swiper-slide">
-                  <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                  <h3 class="category-title">Fruits & Veges</h3>
-                </a>
+@endforeach
                 
               </div>
             </div>
@@ -280,6 +237,7 @@
                         </div>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
                 <div class="swiper-slide">
@@ -375,7 +333,7 @@
                                   </button>
                               </span>
                           </div>
-                          <a href="#" class="nav-link">Add to Cart <iconify-icon icon="uil:shopping-cart"></a>
+                          <a href="{{route('get.cart',$product->id)}}" class="nav-link">Add to Cart <iconify-icon icon="uil:shopping-cart"></a>
                         </div>
                       </div>
                     </div>

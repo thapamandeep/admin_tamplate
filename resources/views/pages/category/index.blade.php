@@ -30,6 +30,7 @@
                    <thead>
                 <tr>
                     <th>S.N</th>
+                    <th>Image</th>
                     <th>Category Name</th>
                     <th>Created At</th>
                     <th>Actions</th>
@@ -40,6 +41,9 @@
                 @foreach($categories as $category)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>
+                      <img src="{{asset('storage/gallery/'.$category->image)}}" alt="category_image">
+                    </td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->created_at->format('d-M-Y') }}</td>
                     <td>

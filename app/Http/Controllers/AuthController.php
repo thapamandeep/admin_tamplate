@@ -13,6 +13,7 @@ use App\Mail\SendOtpMail;
 use App\Mail\ContactUsMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Category;
+use App\Models\Product;
 
 
 
@@ -79,14 +80,14 @@ if($user){  // Check if user exists
             return redirect()->route('get.admin');
 
         } 
+        elseif(Auth::user()->role_id == 2){
+
+            return redirect()->route('get.user');
+
+        } 
         elseif(Auth::user()->role_id == 1){
 
             return redirect()->route('get.customer');
-
-        } 
-        elseif(Auth::user()->role_id == 2){
-
-            return redirect()->route('get.front');
         }
          else {
             // Unknown role
@@ -269,16 +270,13 @@ return redirect()->route('get.login');
 
 }
 
-public function category($slug)
-{
-    $products = Product::whereHas('category', function($query) use ($slug) {
-        $query->where('slug', $slug);
-    })->get();
 
-    $categories = Category::all();
-    return view('Site.Home.index', compact('products', 'categories'));
+public function getProducts($categoryId){
+
+$products = Product::where('category_id',$categoryId)->get();
+$categories = Category::all();
+return view('Site.pages.get-products',compact('products','categories'));
 }
-
 
 
 

@@ -17,7 +17,7 @@
               {{$product->description}}
             </p>
 
-            <button class="btn btn-primary">Add to Cart</button>
+            <a href="{{route('get.cart', $product->id)}}"><button class="btn btn-primary">Add to Cart</button></a>
         </div>
     </div>
 </div>

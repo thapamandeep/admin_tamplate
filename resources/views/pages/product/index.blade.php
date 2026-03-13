@@ -54,7 +54,12 @@
 
                     <td>{{ $product->title }}</td>
 
-                    <td>{{ $product->description }}</td>
+  <td>
+    <p class="text-secondary mb-0"
+       style="max-width:250px; word-wrap:break-word;">
+        {{ \Illuminate\Support\Str::words($product->description, 20, '...') }}
+    </p>
+</td>
 
                     <td>
                         <span class="badge qty-badge">
@@ -76,10 +81,11 @@
 
 
                  <td>
-                                    <a href="{{route('detail.product',$product->id)}}"
-                                       class="btn btn-sm btn-view">
-                                        <i class="fas fa-eye"></i> View
-                                    </a>
+   <td style="white-space:nowrap;">
+    <a href="{{route('detail.product',$product->id)}}"
+       class="btn btn-sm btn-view">
+        <i class="fas fa-eye"></i> View
+    </a>
 
                                     <a href="{{ route('edit.product', $product->id) }}"
                                        class="btn btn-sm btn-primary">

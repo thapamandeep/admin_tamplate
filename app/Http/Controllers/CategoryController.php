@@ -11,9 +11,20 @@ class CategoryController extends Controller
     public function storeCategory(Request $request){
         $data = $request->validate([
             'name'=> 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+          $newImage = "";
+if ($request->hasFile('image')) {
+    $file = $request->file('image');
+    $newImage = time() . '.' . $file->getClientOriginalExtension();
+    $file->storeAs('gallery', $newImage, 'public');
+}
+
+   
         $category = new Category();
         $category->name = $data['name'];
+        $category->image = $newImage;
 
         $category->save();
           
@@ -31,11 +42,30 @@ class CategoryController extends Controller
 
     }
 
-    public function updateCategory(Request $request, $id){
+    public function updateCategory(Request $request, Category $category){
+
+    $data = $request->validate([
+
+    'name'=>'required|string',
+    'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+    ]);
+
+    if ($request->hasFile('image')) {
+     
+        $oldImage = $category->image;
+
+        $file = $request->file('image');
+        $newImage = time() . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('gallery', $newImage, 'public');
+        $category->image = $newImage;
+
+         }else{
+        $category->image = $data['old_image'];
+    }
    
-     $category = Category::findOrFail($id);
+    
   
-    $category->name = $request->name;
+    $category->name = $data->name;
 
     $category->save();
 

@@ -18,7 +18,9 @@ class SiteController extends Controller
 
     $categories = Category::all();
 
-    return view('pages.home', compact('categories'));
+    // $products = Product::where('category_id',$categoryId)->get();
+
+    return view('pages.home', compact('categories','products'));
 }
 
     public function table(){

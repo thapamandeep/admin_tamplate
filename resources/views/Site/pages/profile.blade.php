@@ -164,7 +164,7 @@
                     <a href="#"><i class="fa fa-shopping-bag me-2"></i> Orders</a>
                     <a href="#"><i class="fa fa-heart me-2"></i> Wishlist</a>
                     <a href="#"><i class="fa fa-lock me-2"></i> Change Password</a>
-                    <a href="{{route('get.login')}}"><i class="fa fa-sign-out me-2"></i> Logout</a>
+                    <a href="{{route('logout.page')}}"><i class="fa fa-sign-out me-2"></i> Logout</a>
                 </div>
 
             </div>

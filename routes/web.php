@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\HomeMiddleware;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\CustomerMiddleware;
+
 
 // Route::get('/',[HeaderController::class,'header']);
 
@@ -90,7 +92,7 @@ Route::post('/reset-password', [AuthController::class, 'updatePassword'])
       ->name('post.reset.password');
 
   Route::get('/',[SiteController::class,'frontTamplate'])
-        ->name('get.front')->middleware('user');
+        ->name('get.front');
 
   Route::get('/view-profile',[SiteController::class,'viewProfile'])->name('get.viewProfile')->middleware('user');   
   
@@ -98,4 +100,11 @@ Route::post('/reset-password', [AuthController::class, 'updatePassword'])
 
   Route::post('/contact-store',[AuthController::class,'contact_store'])->name('post.contactus');
 
-  Route::get('/products/{slug}', [AuthController::class, 'category'])->name('get.category.products');
+  Route::get('/products/{categoryId}', [AuthController::class, 'getProducts'])->name('get.products');
+
+  // --------------------cart--------------------//
+  Route::get('/cart/{product}',[CartController::class,'cart'])->name('get.cart')->middleware('user');
+  Route::post('/add-to-cart/{product}',[CartController::class,'add'])->name('post.add.cart')->middleware('user');
+  Route::get('/cart-collection',[CartController::class,'cartShow'])->name('get.cart.show')->middleware('user');
+  Route::get('/delete-cart/{cart}',[CartController::class,'deleteCart'])->name('get.delete.cart')->middleware('user');
+  Route::post('/cart-purchase',[CartController::class,'purchaseCart'])->name('post.purchase')->middleware('user');
