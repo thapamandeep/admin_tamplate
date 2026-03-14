@@ -18,9 +18,7 @@ class SiteController extends Controller
 
     $categories = Category::all();
 
-    // $products = Product::where('category_id',$categoryId)->get();
-
-    return view('pages.home', compact('categories','products'));
+    return view('pages.home', compact('categories'));
 }
 
     public function table(){
@@ -60,8 +58,10 @@ return view('pages.customer');
 }
 
 public function userPage(){
-
-return view('pages.user');
+ $categories = Category::all();
+    $products = Product::all();
+       $bestSellingproducts = Product::orderBy('cost','desc')->take(10)->get(); 
+return view('Site.Home.index',compact('categories','products','bestSellingproducts'));
 }
    
 public function adminPage(){

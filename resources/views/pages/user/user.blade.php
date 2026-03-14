@@ -1,4 +1,4 @@
-@extends('layout.userLayout')
+@extends('Site.layout.tamplate')
 @section('content')
 <div class="content-wrapper">
 <div>

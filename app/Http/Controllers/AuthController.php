@@ -231,7 +231,7 @@ public function contact_store(Request $request)
     ];
 
     // Send mail to ADMIN Gmail
-    Mail::to('mgrmandeep07@gmail.com')
+    Mail::to($request->email)
         ->send(new ContactUsMail($data));
   
 return back()

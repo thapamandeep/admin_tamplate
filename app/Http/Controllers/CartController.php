@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderStatusUpdated;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Cart;
@@ -22,7 +24,7 @@ class CartController extends Controller
    public function add(Product $product, Request $request){
     $data = $request->validate([
         'quantity'=>'required|integer|min:1',
-       
+               
     ]);
 
     if($data['quantity'] > $product->quantity){
@@ -30,15 +32,18 @@ class CartController extends Controller
     return redirect()->back()->with('error','you can not add to cart because stock is not avilable in your quantity');
     }
 
+      $totalCost = $product->cost * $data['quantity'];
+
     $cart = new Cart();
     $cart->user_id = Auth::user()->id;
     $cart->product_id = $product->id;
     $cart->quantity = $data['quantity'];
+    $cart->total_cost = $totalCost;
     
   
     $cart->save();
 
-    return redirect()->back()->with('success','your orders product are add in cart successfully');
+     return redirect()->back()->with('success', 'Order placed successfully and email sent!');
 
    }
 
@@ -56,9 +61,11 @@ class CartController extends Controller
    return redirect()->back()->with('success','your  cart product has been remove from the add cart');
    }
 
-   public function purchaseCart(Cart $cart, Request $request){
+   public function purchaseCart( Request $request){
 
    $carts = Cart::where('user_id',Auth::user()->id)->get();
+
+    $ordersData = [];
 
    foreach($carts as $cart){
 
@@ -66,17 +73,44 @@ class CartController extends Controller
    $orders->user_id = $cart->user_id;
    $orders->product_id = $cart->product_id;
    $orders->quantity = $cart->quantity;
+   $orders->status = 'processing';
 
    $orders->save();
+
+    $orders->load('user', 'product');
    
+   $ordersData[] = $orders;
+
+
    $cart->delete();
 
    }
+
+
+
+    if(count($ordersData) > 0){
+       
+     Mail::to(Auth::user()->email)->send(new OrderStatusUpdated($ordersData));
+   
+
+   }
+ 
+
        return redirect()->back()->with('success','Order placed successfully');
    }
 
-//    public function  showOrder(){
+   
 
-//    $orders = 
-//    }
+   public function  showOrder(){
+
+
+  $orders = Order::with('product','user')->get();
+
+    // Group orders by user_id
+     $userOrder = Order::with('product', 'user')
+        ->get()
+        ->groupBy(fn($order) => $order->user?->id ?? 0); 
+
+  return view('pages.order.index',compact('userOrder'));
+   }
 }

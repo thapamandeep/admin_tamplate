@@ -108,3 +108,9 @@ Route::post('/reset-password', [AuthController::class, 'updatePassword'])
   Route::get('/cart-collection',[CartController::class,'cartShow'])->name('get.cart.show')->middleware('user');
   Route::get('/delete-cart/{cart}',[CartController::class,'deleteCart'])->name('get.delete.cart')->middleware('user');
   Route::post('/cart-purchase',[CartController::class,'purchaseCart'])->name('post.purchase')->middleware('user');
+
+  // for oders data----------------------------//
+  Route::get('/orders-slift',[CartController::class,'showOrder'])->name('get.show.order')->middleware('role');
+
+  // for order updated mail--------------------//
+  Route::post('/order-updated-mail',[OrderController::class,' updateOrderStatus'])->name('post.updated.order');
