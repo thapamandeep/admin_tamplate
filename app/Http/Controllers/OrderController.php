@@ -95,4 +95,12 @@ $review->save();
 
 return redirect()->back()->with('success','your review has submitted');
 }
+
+public function allReview(){
+
+$reviews = Review::all();
+$categories = Category::all();
+
+return view('review.index', compact('reviews','categories'));
+}
 }

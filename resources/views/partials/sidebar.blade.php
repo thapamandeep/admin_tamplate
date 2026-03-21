@@ -113,6 +113,13 @@
                   <p>Orders Tables</p>
                 </a>
               </li>
+
+                <li class="nav-item">
+                <a href="{{route('get.review.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Product Review</p>
+                </a>
+              </li>
 </ul>
 
   <li class="nav-item">

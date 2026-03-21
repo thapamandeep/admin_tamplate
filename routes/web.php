@@ -118,6 +118,9 @@ Route::post('/reset-password', [AuthController::class, 'updatePassword'])
   Route::get('product-review/{product_id}',[OrderController::class,'review'])->name('get.product.review')->middleware('user');
   Route::post('/post-review/{product_id}',[OrderController::class,'sendReview'])->name('post.review')->middleware('user');
 
+  // --------------------for all review show -----------------------------//
+  Route::get('/show-review',[OrderController::class,'allReview'])->name('get.review.index')->middleware('admin');
+
   // for order updated mail--------------------//
   Route::post('/order-updated-mail',[OrderController::class,' updateOrderStatus'])->name('post.updated.order');
 

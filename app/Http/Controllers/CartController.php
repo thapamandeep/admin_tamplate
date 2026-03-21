@@ -71,13 +71,27 @@ class CartController extends Controller
 
    $orders = new Order();
    $orders->user_id = $cart->user_id;
-   $orders->Product_id = $cart->product_id;
+   $orders->product_id = $cart->product_id;
    $orders->quantity = $cart->quantity;
    $orders->status = 'processing';
 
    $orders->save();
 
-    $orders->load('user', 'product');
+   $product = Product::find($cart->product_id);
+
+   if($product){
+
+   if($product->quantity>=$cart->quantity){
+
+   $product->quantity-= $cart->quantity;
+
+   $product->save();
+
+   }else{
+
+   return redirect()->back()->with('error','stock not avilable');
+   }
+   }
    
 
 
