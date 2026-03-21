@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="content-wrapper">
+
 <style>
 body{
     background: linear-gradient(135deg,#eef2f7,#f9fbfd);
@@ -111,8 +113,8 @@ input:focus{
 </style>
 
 <div class="category-container">
- 
-<h2>✏️ Edit Category</h2>
+
+    <h2>📂 Add Category</h2>
 
     {{-- Success Message --}}
     @if(session('success'))
@@ -121,14 +123,19 @@ input:focus{
         </div>
     @endif
 
-    <form action="{{ route('update.category',$category->id) }}" method="POST">
+    {{-- Add enctype for file upload --}}
+    <form action="{{ route('update.category',$category->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
             <label>Category Name</label>
-            <input type="text" name="name"
-                   placeholder="Enter category name"
-                   value="{{$category->name}}">
+            <input type="text" name="name" placeholder="Enter category name" value="{{$category->name}}">
+        </div>
+
+        {{-- New File Input for Image --}}
+        <div class="form-group">
+            <label>Category Image</label>
+            <input type="file" name="image" accept="image/*" value="{{$category->image}}">
         </div>
 
         <button type="submit" class="submit-btn">
@@ -137,6 +144,7 @@ input:focus{
 
     </form>
 
+</div>
 </div>
 
 @endsection

@@ -161,7 +161,7 @@
 
                 <div class="profile-menu">
                     <a href="#"><i class="fa fa-user me-2"></i> Profile</a>
-                    <a href="#"><i class="fa fa-shopping-bag me-2"></i> Orders</a>
+                    <a href="{{route('get.my.order')}}"><i class="fa fa-shopping-bag me-2"></i> Orders</a>
                     <a href="#"><i class="fa fa-heart me-2"></i> Wishlist</a>
                     <a href="#"><i class="fa fa-lock me-2"></i> Change Password</a>
                     <a href="{{route('logout.page')}}"><i class="fa fa-sign-out me-2"></i> Logout</a>

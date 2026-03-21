@@ -15,17 +15,19 @@
 
         <h2 style="color:#28a745;">FoodMart order updated Message</h2>
 
-       <h2>Hello {{ $user->name }}</h2>
+       <h2>Hello {{ $orders->user->name }}</h2>
 
         <p>Your order has been updated.</p>
 
-       @foreach($data as $order)
-    <li>{{ $order->product->title }} - Quantity: {{ $order->quantity }}</li>
-       @endforeach
+     <p>Product: <span style="color:green">{{$data->product->title}}</span></p>
+     
+     <p>Quantity:  <span style="color:green">{{$data->quantity}}</span></p>
 
-        <p>Status: {{ $data[0]->status ?? ''}}</p>
+         <p>Cost: <span style="color:green">{{$data->product->cost * $data->quantity}}</span></p>
 
-        <p>Thank you for shopping with us.</p>
+        <p>Status:  <span style="color:green">{{ strtoupper($data->status) ?? ""}}</span></p>
+
+        <p style="color:green; font-size:bold">Thank you for shopping with us.</p>
         <div style="
             background:#f7f7f7;
             padding:15px;

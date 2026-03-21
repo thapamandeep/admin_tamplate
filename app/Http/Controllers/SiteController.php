@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Cart;
+use App\Models\Hero;
 use Carbon\Carbon;
 
 
@@ -60,8 +62,13 @@ return view('pages.customer');
 public function userPage(){
  $categories = Category::all();
     $products = Product::all();
+    $heroes = Hero::all();
+    
+  
+
        $bestSellingproducts = Product::orderBy('cost','desc')->take(10)->get(); 
-return view('Site.Home.index',compact('categories','products','bestSellingproducts'));
+
+return view('Site.Home.index',compact('categories','products','bestSellingproducts','heroes'));
 }
    
 public function adminPage(){
@@ -97,8 +104,11 @@ return view('pages.category.index', compact('categories'));
  public function frontTamplate(){
     $categories = Category::all();
     $products = Product::all();
+    $heroes = Hero::all();
+      
+
        $bestSellingproducts = Product::orderBy('cost','desc')->take(10)->get();                  
- return view('Site.Home.index',compact('products', 'categories','bestSellingproducts'));
+ return view('Site.Home.index',compact('products', 'categories','bestSellingproducts','heroes'));
 }
 
 public function bestSelling(){

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\Cart;
+use App\Models\Review;
 
 class Product extends Model
 {
@@ -25,4 +26,9 @@ class Product extends Model
     public function carts(){
         return $this->hasMany(Cart::class,'product_id');
     }
+
+    public function reviews()
+{
+    return $this->hasMany(Review::class);
+}
 }

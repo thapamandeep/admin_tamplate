@@ -6,6 +6,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\HomeMiddleware;
 use App\Http\Middleware\RoleMiddleware;
@@ -62,7 +63,7 @@ Route::get('/category-table',[SiteController::class,'categoryTable'])->name('get
 // this for edit
 Route::get('/edit-category/{id}',[CategoryController::class,'editCategory'])->name('edit.category');
 Route::get('/edit-product/{product}',[ProductController::class,'editProduct'])->name('edit.product');
-Route::post('/update-category/{id}',[CategoryController::class,'updateCategory'])->name('update.category');
+Route::post('/update-category/{category}',[CategoryController::class,'updateCategory'])->name('update.category');
 Route::post('/update-product/{product}',[ProductController::class,'updateProduct'])->name('update.product');
 Route::get('/edit-user/{user}',[AuthController::class,'editUser'])->name('edit.user');
 Route::post('/edit-user/{user}',[AuthController::class,'updateUser'])->name('update.user');
@@ -112,5 +113,24 @@ Route::post('/reset-password', [AuthController::class, 'updatePassword'])
   // for oders data----------------------------//
   Route::get('/orders-slift',[CartController::class,'showOrder'])->name('get.show.order')->middleware('role');
 
+  // for mine order-------------------------//
+  Route::get('/my-order',[OrderController::class,'myOrder'])->name('get.my.order')->middleware('user');
+  Route::get('product-review/{product_id}',[OrderController::class,'review'])->name('get.product.review')->middleware('user');
+  Route::post('/post-review/{product_id}',[OrderController::class,'sendReview'])->name('post.review')->middleware('user');
+
   // for order updated mail--------------------//
   Route::post('/order-updated-mail',[OrderController::class,' updateOrderStatus'])->name('post.updated.order');
+
+  // for shipping and deliverd
+  Route::get('/orders/shipping/{userId}', [OrderController::class,'markUserShipping'])->name('order.shipping.user');
+  Route::get('/orders/delivered/{userId}', [OrderController::class,'markUserDelivered'])->name('order.delivered.user');
+
+  // for delete mine order----------------------//
+  Route::get('/delete-mine-order/{order}',[OrderController::class,'myOrderDelete'])->name('get.myorder.delete')->middleware('user');
+
+  // -----------------hero section--------------------------//
+  Route::get('/hero-section',[AuthController::class,'heroSection'])->name('get.hero.section')->middleware('role');
+  Route::post('/post-hero-section',[AuthController::class,'storeHero'])->name('post.hero')->middleware('role');
+  Route::get('/hero-table',[AuthController::class,'heroIndex'])->name('get.hero.table')->middleware('role');
+  Route::get('/hero-edit/{hero}',[AuthController::class,'editHero'])->name('get.hero.edit')->middleware('role');
+  Route::post('/updated-heroes/{hero}',[AuthController::class,'updateHero'])->name('post.edit.hero')->middleware('role');

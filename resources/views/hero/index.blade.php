@@ -14,8 +14,8 @@
 
     <h3 class="card-title">📦 Products Data</h3>
 
-    <a href="{{ route('create.product') }}" class="add-btn">
-        + Add Product
+    <a href="{{ route('get.hero.section') }}" class="add-btn">
+        + Add Hero
     </a>
 
 </div>
@@ -29,70 +29,51 @@
                 <tr>
                     <th>S.N</th>
                     <th>Image</th>
-                    <th>Title</th>
+                    <th>Name</th>
                     <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
-                    <th>Category</th>
                     <th>Created</th>
                     <th>Actions</th>
                 </tr>
             </thead>
 
             <tbody>
-                @foreach($products as $product)
+                @foreach($heroes as $hero)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
 
                     <td>
-                        @if($product->image)
-                            <img src="{{ asset('storage/gallery/'.$product->image) }}" style="height:50px; width:50px">
+                        @if($hero->image)
+                            <img src="{{ asset('storage/gallery/'.$hero->image) }}" style="height:50px; width:50px">
                         @else
                             <img src="https://via.placeholder.com/60">
                         @endif
                     </td>
 
-                    <td>{{ $product->title }}</td>
+                    <td>{{ $hero->name }}</td>
 
   <td>
     <p class="text-secondary mb-0"
        style="max-width:250px; word-wrap:break-word;">
-        {{ \Illuminate\Support\Str::words($product->description, 20, '...') }}
+        {{ \Illuminate\Support\Str::words($hero->description, 20, '...') }}
     </p>
 </td>
 
-                    <td>
-                        <span class="badge qty-badge">
-                            {{ $product->quantity }}
-                        </span>
-                    </td>
+
 
                     <td>
-                        <span class="badge cost-badge">
-                            Rs {{ $product->cost }}
-                        </span>
-                    </td>
-
-                    <td>{{ $product->category_id }}</td>
-
-                    <td>
-                        {{ $product->created_at->format('d M Y') }}
+                        {{ $hero->created_at->format('d M Y') }}
                     </td>
 
 
                 
    <td style="white-space:nowrap;">
-    <a href="{{route('detail.product',$product->id)}}"
-       class="btn btn-sm btn-view">
-        <i class="fas fa-eye"></i> View
-    </a>
-
-                                    <a href="{{ route('edit.product', $product->id) }}"
+   
+                                    <a href="{{route('get.hero.edit',$hero->id)}}"
                                        class="btn btn-sm btn-primary">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
 
-                                    <a href="{{ route('delete.product',$product->id) }}"
+                                    <a href="#"
                                        class="btn btn-sm btn-danger"
                                        onclick="return confirm('Are you sure?')">
                                         <i class="fas fa-trash"></i> Delete

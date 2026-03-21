@@ -38,42 +38,33 @@ if ($request->hasFile('image')) {
 
 
 
-    return view('pages.category.editCategory',compact('category'));
+    return view('pages.category.edit',compact('category'));
 
     }
 
-    public function updateCategory(Request $request, Category $category){
-
+  public function updateCategory(Request $request, Category $category)
+{
     $data = $request->validate([
-
-    'name'=>'required|string',
-    'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        'name' => 'required|string',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
     ]);
 
     if ($request->hasFile('image')) {
-     
-        $oldImage = $category->image;
 
         $file = $request->file('image');
-        $newImage = time() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('gallery', $newImage, 'public');
+        $newImage = time().'.'.$file->getClientOriginalExtension();
+        $file->storeAs('gallery',$newImage,'public');
+
         $category->image = $newImage;
-
-         }else{
-        $category->image = $data['old_image'];
     }
-   
-    
-  
-    $category->name = $data->name;
 
+    $category->name = $data['name'];
     $category->save();
 
-    
-    Session::flash('success', 'Category Updated Successfully');
+    Session::flash('success','Category Updated Successfully');
 
     return redirect()->route('create.category');
-    }
+}
 
     public function deleteCategory(Category $category){
 

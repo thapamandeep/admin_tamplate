@@ -65,13 +65,13 @@ class CartController extends Controller
 
    $carts = Cart::where('user_id',Auth::user()->id)->get();
 
-    $ordersData = [];
+   
 
    foreach($carts as $cart){
 
    $orders = new Order();
    $orders->user_id = $cart->user_id;
-   $orders->product_id = $cart->product_id;
+   $orders->Product_id = $cart->product_id;
    $orders->quantity = $cart->quantity;
    $orders->status = 'processing';
 
@@ -79,18 +79,12 @@ class CartController extends Controller
 
     $orders->load('user', 'product');
    
-   $ordersData[] = $orders;
+
 
 
    $cart->delete();
-
-   }
-
-
-
-    if(count($ordersData) > 0){
        
-     Mail::to(Auth::user()->email)->send(new OrderStatusUpdated($ordersData));
+     Mail::to(Auth::user()->email)->send(new OrderStatusUpdated($orders));
    
 
    }
@@ -107,10 +101,10 @@ class CartController extends Controller
   $orders = Order::with('product','user')->get();
 
     // Group orders by user_id
-     $userOrder = Order::with('product', 'user')
-        ->get()
-        ->groupBy(fn($order) => $order->user?->id ?? 0); 
+    //  $userOrder = Order::with('product', 'user')
+    //     ->get()
+    //     ->groupBy(fn($order) => $order->user?->id ?? 0); 
 
-  return view('pages.order.index',compact('userOrder'));
+  return view('pages.order.index',compact('orders'));
    }
 }

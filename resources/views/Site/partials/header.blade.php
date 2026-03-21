@@ -25,6 +25,16 @@
     color: #333;
 }
 </style>
+
+@php
+use App\Models\Cart;
+if(Auth::check()){
+$total_cost = Cart::where('user_id',Auth::user()->id)->sum('total_cost') ;
+}else{
+  $total_cost = 0;
+}
+@endphp
+
     <header>
       <div class="container-fluid">
         <div class="row py-3 border-bottom">
@@ -99,7 +109,7 @@
               <button class="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                <a href="{{route('get.cart.show')}}"><span class="fs-6 text-muted dropdown-toggle">Your Cart</span></a> 
                 <span class="cart-total fs-5 fw-bold">
-              
+            NPR: {{$total_cost}}
                 </span>
               </button>
             </div>

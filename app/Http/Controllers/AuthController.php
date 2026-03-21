@@ -14,6 +14,7 @@ use App\Mail\ContactUsMail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Hero;
 
 
 
@@ -278,6 +279,72 @@ $categories = Category::all();
 return view('Site.pages.get-products',compact('products','categories'));
 }
 
+// -----------------for herosection-----------------------//
+
+public function heroSection(){
+
+return view('hero.form');
+}
+
+public function storeHero(Request $request){
+
+$data = $request->validate([
+    'name'=>'required|string|max:255',
+     'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    'description' => 'required|string',
+]);
+
+$newImage = "";
+
+if($request->hasFile('image')){
+    $file = $request->file('image');
+    $newImage = time(). '.'.$file->getClientOriginalExtension();
+    $file->storeAs('gallery',$newImage,'public');
+}
+
+$heros = new Hero();
+$heros->name = $data['name'];
+$heros->image = $newImage;
+$heros->description = $data['description'];
+
+$heros->save();
+
+return redirect()->back()->with('success','your image has save  successfull for the hero section');
+}
+
+public function heroIndex(){
+
+$heroes = Hero::all();
+return view('hero.index', compact('heroes'));
+}
+
+public function editHero(Hero $hero){
+
+return view('hero.edit', compact('hero'));
+}
+
+public function updateHero(Request $request, Hero $hero){
+
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+    ]);
+
+    $hero->name = $data['name'];
+    $hero->description = $data['description'];
+
+    if($request->hasFile('image')){
+        $file = $request->file('image');
+        $newImage = time().'.'.$file->getClientOriginalExtension();
+        $file->storeAs('gallery', $newImage, 'public');
+
+        $hero->image = $newImage;
+    }
+
+    $hero->save();
+
+    return redirect()->back()->with('success','your heroes data has been updated');
+}
 
 
 }

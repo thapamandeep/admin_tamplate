@@ -24,7 +24,7 @@ class OrderStatusUpdated extends Mailable
     public function __construct($orders, $message = "")
     {
        $this->orders = $orders;
-       $this->user = $orders[0]->user ?? Auth::user();
+     $this->user = $orders[0]->user ?? Auth::user();
         $this->messageText = $message; 
     }
 

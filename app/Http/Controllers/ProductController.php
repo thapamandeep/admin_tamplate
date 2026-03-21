@@ -33,10 +33,8 @@ $products->description = $data['description'];
 $products->image = $newImage;
 
 $quantity = $data['quantity'];
-$cost_per_unit = $data['cost'];
-
 $products->quantity = $quantity;
-$products->cost = $quantity * $cost_per_unit;
+$products->cost = $data['cost'];
 $products->category_id= $data['category_id'];
 
 $products->save();
@@ -73,10 +71,9 @@ $product->title = $data['title'];
 $product->description = $data['description'];
 
 $quantity = $data['quantity'];
-$cost_per_unit = $data['cost'];
 
 $product->quantity = $quantity;
-$product->cost = $quantity * $cost_per_unit;
+$product->cost = $data['cost'];
 $product->category_id= $data['category_id'];
 
  if ($request->hasFile('image')) {

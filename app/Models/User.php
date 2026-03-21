@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Review;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class,'user_id');
     }
+
+    public function reviews()
+{
+    return $this->hasMany(Review::class);
+}
     /**
      * Get the attributes that should be cast.
      *

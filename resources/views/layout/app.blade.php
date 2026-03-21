@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css')}}">
 <!-- vehicle-form  -->
  <link rel="stylesheet" href="{{ asset('assets/css/vehicle-form.css') }}">
+ <link rel="stylesheet" href="{{ asset('assets/css/hero-form.css') }}">
 
 
 </head>

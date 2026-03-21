@@ -114,6 +114,30 @@
                 </a>
               </li>
 </ul>
+
+  <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Hero Section
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+  <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('get.hero.section')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Form</p>
+                </a>
+              </li>
+
+               <li class="nav-item">
+                <a href="{{route('get.hero.table')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Heroes Table</p>
+                </a>
+              </li>
+</ul>
           </li>
 </div>
 </aside>

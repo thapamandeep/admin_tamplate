@@ -19,15 +19,11 @@
 
 </div>
           
-@foreach($userOrder as $userId => $userOrders)
-    @php $userName = $userOrders->first()->user?->name ?? 'Unknown User'; @endphp
-    <h4 style="background-color:#f1f8ff; color:#0d6efd; font-weight:bold; padding:10px; border-radius:5px;">
-        User: {{ $userName }}
-    </h4>
 
-    @foreach($userOrders as $order)
-        <!-- each order row -->
-    @endforeach
+   <h4 style="background-color:#198754; color:#fff; font-weight:bold; padding:10px; border-radius:5px;">
+
+</h4>
+   
 
               <!-- /.card-header -->
               <div class="card-body">
@@ -37,22 +33,22 @@
                 <tr>
                     <th>S.N</th>
                     <th>Image</th>
+                    <th>User Name</th>
                     <th>Title</th>
                     <th>Quantity</th>
                     <th>Cost</th>
                     <th>Category</th>
                     <th>Created</th>
-                    <th>Actions</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                
                 </tr>
             </thead>
-                
+    
             <tbody>
-   
-
-                @foreach($userOrders as $order)
+       @foreach($orders as $order)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-
                     <td>
                         @if($order->product->image)
                             <img src="{{ asset('storage/gallery/'.$order->product->image) }}" style="height:50px; width:50px">
@@ -60,48 +56,29 @@
                             <img src="https://via.placeholder.com/60">
                         @endif
                     </td>
-
+                    <td>{{$order->user->name}}</td>
                     <td>{{ $order->product->title }}</td>
+                    <td>{{ $order->quantity }}</td>
+                    <td>Rs {{ $order->product->cost * $order->quantity }}</td>
+                    <td>{{ $order->product->category_id }}</td>
+                    <td>{{ $order->product->created_at->format('d M Y') }}</td>
+                    <td>{{$order->status}}</td>
+                     <td style="white-space:nowrap;">
+        <a href="{{route('order.shipping.user',$order->id)}}" 
+           class="btn btn-warning btn-sm" 
+           onclick="return confirm('Mark this order as Shipping?')">
+           Shipping
+        </a>
 
-                    <td>
-                        <span class="badge qty-badge">
-                            {{ $order->quantity }}
-                        </span>
-                    </td>
-
-                    <td>
-                        <span class="badge cost-badge">
-                            Rs {{$order->product->cost }}
-                        </span>
-                    </td>
-
-                    <td>{{$order->product->category_id }}</td>
-
-                    <td>
-                        {{$order->product->created_at->format('d M Y') }}
-                    </td>
-
-
-                 
-   <td style="white-space:nowrap;">
-    <a href="#"
-       class="btn btn-sm btn-view">
-        <i class="fas fa-eye"></i> View
-    </a>
-
-                                    <a href="#"
-                                       class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-
-                                    <a href="#"
-                                       class="btn btn-sm btn-danger"
-                                       onclick="return confirm('Are you sure?')">
-                                        <i class="fas fa-trash"></i> Delete
-                                    </a>
-                                </td>
+        <a href="{{route('order.delivered.user',$order->id)}}" 
+           class="btn btn-success btn-sm" 
+           onclick="return confirm('Mark this order as Delivered?')">
+           Delivered
+        </a>
+    </td>
                 </tr>
-                @endforeach
+                @endforeach  
+             
                
             </tbody>
 
@@ -110,16 +87,20 @@
                 </table>
              
               </div>
+       
+
               <!-- /.card-body -->
             </div>
+            
             <!-- /.card -->
 
-             @endforeach
-         
+             
             <!-- /.card -->
           </div>
+          
           <!-- /.col -->
         </div>
+       
         <!-- /.row -->
       </div>
       </div>
